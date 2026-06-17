@@ -1,5 +1,6 @@
 import fs from 'fs/promises';
 import express from "express";
+import { validateTask, validateUpdateTask } from './middleware/validation.js';
 
 const app = express();  
 const PORT  = '3000';
@@ -17,7 +18,7 @@ app.get('/tasks', async (req, res, next)=>{
     }
 });
 
-app.post('/tasks', async (req, res, next)=>{
+app.post('/tasks', validateTask, async (req, res, next)=>{
     try{
         const data = await fs.readFile("./tasks.json", 'utf-8');
         const tasks = JSON.parse(data);
@@ -33,7 +34,7 @@ app.post('/tasks', async (req, res, next)=>{
     }
 })
 
-app.put('/tasks/:id', async (req, res, next)=>{
+app.put('/tasks/:id', validateUpdateTask, async (req, res, next)=>{
     try{
         const data = await fs.readFile("./tasks.json", 'utf-8');
         const tasks = JSON.parse(data);

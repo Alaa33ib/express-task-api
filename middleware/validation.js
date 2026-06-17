@@ -45,3 +45,53 @@ export const validateTask = async (req, res, next)=>{
         next(error);
     }
 }
+
+export const validateUpdateTask = async (req, res, next) => {
+    try {
+        const { title, priority, progress } = req.body;
+        const validPriorities = ['low', 'medium', 'high'];
+
+        if (title !== undefined) {
+            if (typeof title !== 'string' || title.trim() === '') {
+                const error = new Error("Updated title must be a valid non-empty text string.");
+                error.statusCode = 400;
+                return next(error);
+            }
+
+            const data = await fs.readFile("./tasks.json", 'utf-8');
+            const tasks = JSON.parse(data);
+            
+            const titleExists = tasks.some(task => 
+                task.title.toLowerCase().trim() === title.toLowerCase().trim() && 
+                task.id !== parseInt(req.params.id)
+            );
+            
+            if (titleExists) {
+                const error = new Error("This task title already exists, try a different title.");
+                error.statusCode = 400;
+                return next(error);
+            }
+        }
+
+        if (priority !== undefined) {
+            if (typeof priority !== 'string' || !validPriorities.includes(priority.toLowerCase().trim())) {
+                const error = new Error("Updated priority must be either 'low', 'medium', or 'high'.");
+                error.statusCode = 400;
+                return next(error);
+            }
+        }
+
+        if (progress !== undefined) {
+            if (progress > 100 || progress < 0 || !Number.isInteger(progress)) {
+                const error = new Error("Updated progress must be a whole number between 0 and 100.");
+                error.statusCode = 400;
+                return next(error);
+            }
+        }
+
+        next();
+
+    } catch (error) {
+        next(error);
+    }
+};
