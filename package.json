@@ -1,0 +1,23 @@
+{
+  "name": "task-api",
+  "version": "1.0.0",
+  "description": "A simple JS app for task management using express.js",
+  "homepage": "https://github.com/Alaa33ib/express-task-api#readme",
+  "bugs": {
+    "url": "https://github.com/Alaa33ib/express-task-api/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Alaa33ib/express-task-api.git"
+  },
+  "license": "ISC",
+  "author": "",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "express": "^5.2.1"
+  }
+}
