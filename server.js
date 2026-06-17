@@ -2,12 +2,14 @@ import fs from 'fs/promises';
 import express from "express";
 import { validateTask, validateUpdateTask } from './middleware/validation.js';
 
+// Declaring constants
 const app = express();  
 const PORT  = '3000';
 
 
 app.use(express.json());
 
+// GET to retrieve all tasks
 app.get('/tasks', async (req, res, next)=>{
     try {
         const data = await fs.readFile("./tasks.json", 'utf-8');
@@ -18,6 +20,7 @@ app.get('/tasks', async (req, res, next)=>{
     }
 });
 
+// POST to create a new task (calls the validation middleware)
 app.post('/tasks', validateTask, async (req, res, next)=>{
     try{
         const data = await fs.readFile("./tasks.json", 'utf-8');
@@ -34,6 +37,7 @@ app.post('/tasks', validateTask, async (req, res, next)=>{
     }
 })
 
+// POST to update an existing task (calls the validation middleware)
 app.put('/tasks/:id', validateUpdateTask, async (req, res, next)=>{
     try{
         const data = await fs.readFile("./tasks.json", 'utf-8');
@@ -61,6 +65,7 @@ app.put('/tasks/:id', validateUpdateTask, async (req, res, next)=>{
     }
 })
 
+// DELETE to remove a task
 app.delete('/tasks/:id', async (req, res, next)=>{
     try{
         const data = await fs.readFile("./tasks.json", 'utf-8');
@@ -85,6 +90,7 @@ app.delete('/tasks/:id', async (req, res, next)=>{
     }
 })
 
+// Handling errors
 app.use((err, req, res, next)=>{
     console.error("Server Error: ", err.stack);
     res.status(err.statusCode || 500).json({
@@ -93,4 +99,5 @@ app.use((err, req, res, next)=>{
     });
 });
 
+// Starting the server
 app.listen(PORT, ()=> {console.log(`Server is running on http://localhost:${PORT}`);});

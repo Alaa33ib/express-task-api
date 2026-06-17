@@ -9,30 +9,12 @@
     "id": 2,
     "title": "create a task management api",
     "priority": "high",
-    "progress": 40
+    "progress": 100
   },
   {
     "id": 3,
-    "title": "create a tassk management api",
+    "title": "test the code",
     "priority": "high",
-    "progress": 40
-  },
-  {
-    "id": 4,
-    "title": "create a tassk management api",
-    "priority": "high",
-    "progress": 40
-  },
-  {
-    "id": 5,
-    "title": "create a tassk management api",
-    "priority": "high",
-    "progress": 40
-  },
-  {
-    "id": 6,
-    "title": "create a tassk management api",
-    "priority": "high",
-    "progress": 40
+    "progress": 100
   }
 ]
