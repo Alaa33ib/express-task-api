@@ -1,0 +1,33 @@
+### GET Tasks
+
+GET http://localhost:3000/tasks
+
+###
+
+### POST / create a Task
+
+POST http://localhost:3000/tasks
+Content-Type: application/json
+
+{
+    "title":"create a tassk management api",
+    "priority": "high",
+    "progress": 40
+}
+
+###
+
+### PUT / update a task
+PUT http://localhost:3000/tasks/2
+Content-Type: application/json
+
+{
+    "progress": 60
+}
+ 
+###
+
+### DELETE a Task
+DELETE http://localhost:3000/tasks/1
+
+###
