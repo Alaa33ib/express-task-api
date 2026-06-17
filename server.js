@@ -1,6 +1,5 @@
-import http from "http";
 import fs from 'fs/promises';
-
+import express from "express";
 
 const app = express();
 const PORT  = '3000';
@@ -8,10 +7,10 @@ const PORT  = '3000';
 
 app.use(express.json());
 
-app.get('./tasks', async (req, res, next)=>{
+app.get('/tasks', async (req, res, next)=>{
     try {
-        data = await fs.readFile("./tasks.json", 'utf-8');
-        tasks = JSON.parse(data);
+        const data = await fs.readFile("./tasks.json", 'utf-8');
+        const tasks = JSON.parse(data);
         res.json(tasks);
     } catch(error){
         next(error);
